@@ -641,39 +641,3 @@ if (!in_array($accountType, $validTypes)) {
     </script>
 </body>
 </html>
-```
-
----
-
-## ✅ Fichier Terminé !
-
-Maintenant tu as le fichier `configurator.php` complet avec :
-
-✅ Section presets en haut
-✅ 4 onglets (PropFirms, Styles, Budget, Custom)
-✅ Boutons d'actions (Partager, Réinitialiser)
-✅ Formulaire de configuration complet
-✅ Scripts intégrés
-
----
-
-## 🧪 Tester
-
-1. **Upload le fichier** sur InfinityFree
-2. **Va sur** : `http://dojifunding.rf.gd/configurator.php`
-3. **Tu devrais voir** :
-   - Section presets en haut
-   - 8 presets PropFirms
-   - Navigation par onglets
-   - Formulaire de configuration en dessous
-
----
-
-## 📋 Checklist Finale
-
-Vérifie que tu as bien **TOUS ces fichiers** :
-```
-✅ public/js/presets.js (nouveau)
-✅ public/js/configurator.js (modifié)
-✅ public/configurator.php (modifié - ce fichier)
-✅ public/css/style.css (à modifier - styles des presets)
