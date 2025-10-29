@@ -31,8 +31,10 @@ class DojiConfigurator {
     
     init() {
         this.bindEvents();
+        this.loadFromURL(); // Charger depuis l'URL si présent
         this.updateSummary();
         this.calculatePrice();
+        this.renderCustomPresets(); // Afficher les presets personnalisés
     }
     
     bindEvents() {
@@ -273,9 +275,260 @@ class DojiConfigurator {
             btn.disabled = false;
         }, 1500);
     }
+    
+    // ========================================
+    // SYSTÈME DE PRESETS
+    // ========================================
+    
+    // Charger un preset
+    loadPreset(presetId) {
+        // Chercher dans les presets publics
+        let preset = PRESET_CONFIGS[presetId];
+        
+        // Si pas trouvé, chercher dans les presets personnalisés
+        if (!preset) {
+            const customPresets = this.getCustomPresets();
+            preset = customPresets[presetId];
+        }
+        
+        if (!preset) {
+            console.error('Preset non trouvé:', presetId);
+            return;
+        }
+        
+        // Appliquer la configuration
+        this.config = { ...preset.config };
+        
+        // Mettre à jour l'interface
+        this.updateUIFromConfig();
+        this.updateSummary();
+        this.calculatePrice();
+        
+        // Notification
+        this.showNotification(`✅ Preset "${preset.name}" chargé !`);
+    }
+    
+    // Mettre à jour l'UI depuis la config
+    updateUIFromConfig() {
+        // Type de compte
+        document.querySelectorAll('.type-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.type === this.config.accountType);
+        });
+        
+        // Account Size
+        document.getElementById('accountSize').value = this.config.accountSize;
+        document.getElementById('accountSizeValue').textContent = this.formatCurrency(this.config.accountSize);
+        document.getElementById('summarySize').textContent = this.formatCurrency(this.config.accountSize);
+        
+        // Risk System
+        document.querySelector(`input[name="riskSystem"][value="${this.config.riskSystem}"]`).checked = true;
+        const riskNames = {
+            'trailing': 'Trailing Drawdown',
+            'eod': 'EOD Drawdown',
+            'static': 'Static Drawdown'
+        };
+        document.getElementById('summaryRisk').textContent = riskNames[this.config.riskSystem];
+        
+        // Sliders
+        document.getElementById('profitTarget').value = this.config.profitTarget;
+        document.getElementById('targetValue').textContent = `${this.config.profitTarget}%`;
+        document.getElementById('summaryTarget').textContent = `${this.config.profitTarget}%`;
+        
+        document.getElementById('maxDrawdown').value = this.config.maxDrawdown;
+        document.getElementById('drawdownValue').textContent = `${this.config.maxDrawdown}%`;
+        document.getElementById('summaryDrawdown').textContent = `${this.config.maxDrawdown}%`;
+        
+        document.getElementById('profitSplit').value = this.config.profitSplit;
+        document.getElementById('splitValue').textContent = `${this.config.profitSplit}%`;
+        document.getElementById('summarySplit').textContent = `${this.config.profitSplit}%`;
+        
+        document.getElementById('evalDays').value = this.config.evalDays;
+        const evalDaysText = this.config.evalDays === 0 ? 'Aucun' : `${this.config.evalDays} jours min`;
+        document.getElementById('evalDaysValue').textContent = evalDaysText;
+        document.getElementById('summaryEvalDays').textContent = evalDaysText;
+        
+        document.getElementById('fundedDays').value = this.config.fundedDays;
+        const fundedDaysText = this.config.fundedDays === 0 ? 'Aucun' : `${this.config.fundedDays} jours min`;
+        document.getElementById('fundedDaysValue').textContent = fundedDaysText;
+        document.getElementById('summaryFundedDays').textContent = fundedDaysText;
+        
+        document.getElementById('maxLotSize').value = this.config.maxLotSize;
+        document.getElementById('lotSizeValue').textContent = `${this.config.maxLotSize} lots`;
+        document.getElementById('summaryLotSize').textContent = `${this.config.maxLotSize} lots`;
+        
+        // Selects
+        document.getElementById('consistency').value = this.config.consistency;
+        const consistencyText = this.config.consistency === 'none' ? 'Aucune' : `${this.config.consistency}% max`;
+        document.getElementById('summaryConsistency').textContent = consistencyText;
+        
+        document.getElementById('leverage').value = this.config.leverage;
+        document.getElementById('leverageValue').textContent = `1:${this.config.leverage}`;
+        document.getElementById('summaryLeverage').textContent = `1:${this.config.leverage}`;
+    }
+    
+    // Sauvegarder un preset personnalisé
+    saveCustomPreset(name) {
+        const customPresets = this.getCustomPresets();
+        const presetId = 'custom-' + Date.now();
+        
+        customPresets[presetId] = {
+            name: name,
+            emoji: '⭐',
+            description: 'Configuration personnalisée',
+            config: { ...this.config },
+            createdAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('dojiCustomPresets', JSON.stringify(customPresets));
+        this.showNotification(`✅ Preset "${name}" sauvegardé !`);
+        this.renderCustomPresets();
+    }
+    
+    // Récupérer les presets personnalisés
+    getCustomPresets() {
+        const stored = localStorage.getItem('dojiCustomPresets');
+        return stored ? JSON.parse(stored) : {};
+    }
+    
+    // Supprimer un preset personnalisé
+    deleteCustomPreset(presetId) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer ce preset ?')) {
+            return;
+        }
+        
+        const customPresets = this.getCustomPresets();
+        delete customPresets[presetId];
+        localStorage.setItem('dojiCustomPresets', JSON.stringify(customPresets));
+        this.renderCustomPresets();
+        this.showNotification('🗑️ Preset supprimé');
+    }
+    
+    // Générer un lien de partage
+    generateShareLink() {
+        const params = new URLSearchParams({
+            type: this.config.accountType,
+            size: this.config.accountSize,
+            risk: this.config.riskSystem,
+            target: this.config.profitTarget,
+            dd: this.config.maxDrawdown,
+            cons: this.config.consistency,
+            split: this.config.profitSplit,
+            eval: this.config.evalDays,
+            funded: this.config.fundedDays,
+            lev: this.config.leverage,
+            lot: this.config.maxLotSize
+        });
+        
+        const baseUrl = window.location.origin + window.location.pathname;
+        const shareUrl = `${baseUrl}?${params.toString()}`;
+        
+        // Copier dans le presse-papier
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            this.showNotification('🔗 Lien copié dans le presse-papier !');
+        }).catch(() => {
+            // Fallback si clipboard API ne fonctionne pas
+            prompt('Copiez ce lien :', shareUrl);
+        });
+        
+        return shareUrl;
+    }
+    
+    // Charger depuis l'URL
+    loadFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        
+        if (params.has('type')) {
+            this.config = {
+                accountType: params.get('type') || '2steps',
+                accountSize: parseInt(params.get('size')) || 10000,
+                riskSystem: params.get('risk') || 'trailing',
+                profitTarget: parseInt(params.get('target')) || 10,
+                maxDrawdown: parseInt(params.get('dd')) || 5,
+                consistency: params.get('cons') || 'none',
+                profitSplit: parseInt(params.get('split')) || 80,
+                evalDays: parseInt(params.get('eval')) || 5,
+                fundedDays: parseInt(params.get('funded')) || 3,
+                leverage: parseInt(params.get('lev')) || 100,
+                maxLotSize: parseInt(params.get('lot')) || 5
+            };
+            
+            this.updateUIFromConfig();
+            this.updateSummary();
+            this.calculatePrice();
+            this.showNotification('✅ Configuration chargée depuis le lien !');
+        }
+    }
+    
+    // Afficher une notification
+    showNotification(message) {
+        // Créer l'élément de notification
+        const notification = document.createElement('div');
+        notification.className = 'preset-notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Supprimer après 3 secondes
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100px)';
+            notification.style.transition = 'all 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+    
+    // Rendre les presets personnalisés dans l'UI
+    renderCustomPresets() {
+        const container = document.getElementById('customPresetsContainer');
+        if (!container) return;
+        
+        const customPresets = this.getCustomPresets();
+        const presetKeys = Object.keys(customPresets);
+        
+        if (presetKeys.length === 0) {
+            container.innerHTML = '<p class="no-presets">Aucun preset personnalisé sauvegardé</p>';
+            return;
+        }
+        
+        container.innerHTML = presetKeys.map(presetId => {
+            const preset = customPresets[presetId];
+            return `
+                <div class="preset-card custom-preset">
+                    <div class="preset-header">
+                        <span class="preset-emoji">${preset.emoji}</span>
+                        <h4 class="preset-name">${preset.name}</h4>
+                    </div>
+                    <p class="preset-desc">${preset.description}</p>
+                    <div class="preset-actions">
+                        <button class="btn-secondary btn-small" onclick="configurator.loadPreset('${presetId}')">
+                            Charger
+                        </button>
+                        <button class="btn-danger btn-small" onclick="configurator.deleteCustomPreset('${presetId}')">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
 }
+
+// Variable globale pour accès externe
+let configurator;
 
 // Initialiser le configurateur au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
-    new DojiConfigurator();
+    configurator = new DojiConfigurator();
 });
