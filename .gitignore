@@ -1,0 +1,137 @@
+# ============================================
+# DOJI FUNDING - .gitignore
+# ============================================
+
+# === DÉPENDANCES ===
+# Composer (gestionnaire de dépendances PHP)
+/vendor/
+composer.phar
+composer.lock
+
+# NPM / Node (si tu utilises des outils JS)
+/node_modules/
+package-lock.json
+yarn.lock
+
+# === CONFIGURATION SENSIBLE ===
+# Fichiers contenant des mots de passe, clés API, etc.
+.env
+.env.local
+.env.production
+.env.backup
+*.env
+
+# === BASE DE DONNÉES ===
+# Fichiers de base de données locaux
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+/database/*.sql
+
+# === UPLOADS UTILISATEURS ===
+# Images, documents uploadés par les utilisateurs
+/public/assets/uploads/*
+!/public/assets/uploads/.gitkeep
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# === CACHE & SESSIONS ===
+# Fichiers temporaires et cache
+/cache/*
+!/cache/.gitkeep
+/tmp/*
+!/tmp/.gitkeep
+/temp/*
+/storage/cache/*
+/storage/sessions/*
+*.cache
+
+# === LOGS ===
+# Fichiers de logs (erreurs, debug, etc.)
+*.log
+/logs/*
+!/logs/.gitkeep
+npm-debug.log*
+yarn-debug.log*
+error.log
+access.log
+
+# === FICHIERS SYSTÈME (OS) ===
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# === IDE / ÉDITEURS DE CODE ===
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PhpStorm / IntelliJ
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.swn
+
+# NetBeans
+nbproject/
+nbbuild/
+nbdist/
+
+# Eclipse
+.project
+.buildpath
+.settings/
+
+# === BUILD / COMPILATION ===
+# Fichiers générés automatiquement
+/dist/
+/build/
+/public/build/
+/public/hot
+/public/storage
+
+# === TESTS ===
+# Fichiers de tests et couverture de code
+/phpunit.xml
+/coverage/
+/.phpunit.cache
+/.phpunit.result.cache
+
+# === BACKUPS ===
+# Sauvegardes automatiques
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+
+# === AUTRES ===
+# Fichiers divers à ignorer
+*.diff
+*.patch
+*.zip
+*.tar
+*.gz
+*.rar
