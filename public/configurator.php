@@ -1,7 +1,7 @@
 <?php
 /**
  * Doji Funding - Configurateur Personnalisé
- * Interface de configuration d'évaluation en temps réel
+ * Interface de configuration d'évaluation en temps réel avec système de presets
  */
 
 session_start();
@@ -19,6 +19,7 @@ if (!in_array($accountType, $validTypes)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurateur - Doji Funding</title>
+    <meta name="description" content="Créez votre évaluation de trading personnalisée avec notre configurateur avancé">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -40,6 +41,242 @@ if (!in_array($accountType, $validTypes)) {
     <!-- Configurator Main -->
     <main class="configurator-main">
         <div class="container-wide">
+            
+            <!-- ========================================
+                 SECTION PRESETS
+                 ======================================== -->
+            <div class="presets-section">
+                <div class="presets-header">
+                    <h2 class="presets-title">🎯 Configurations Rapides</h2>
+                    <p class="presets-subtitle">Chargez une configuration prédéfinie ou créez la vôtre</p>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <div class="presets-tabs">
+                    <button class="preset-tab active" data-tab="propfirms">
+                        <span class="tab-icon">🏆</span>
+                        <span class="tab-name">PropFirms Populaires</span>
+                    </button>
+                    <button class="preset-tab" data-tab="styles">
+                        <span class="tab-icon">📊</span>
+                        <span class="tab-name">Style de Trading</span>
+                    </button>
+                    <button class="preset-tab" data-tab="budget">
+                        <span class="tab-icon">💰</span>
+                        <span class="tab-name">Par Budget</span>
+                    </button>
+                    <button class="preset-tab" data-tab="custom">
+                        <span class="tab-icon">⭐</span>
+                        <span class="tab-name">Mes Presets</span>
+                    </button>
+                </div>
+
+                <!-- Tab Content: PropFirms -->
+                <div class="presets-content active" id="tab-propfirms">
+                    <div class="presets-grid">
+                        <div class="preset-card" onclick="configurator.loadPreset('funds-trade-max')">
+                            <div class="preset-emoji">🏆</div>
+                            <h3 class="preset-name">Funds Trade Max</h3>
+                            <p class="preset-desc">Style FTMO - Le standard de l'industrie</p>
+                            <div class="preset-tags">
+                                <span class="tag">Populaire</span>
+                                <span class="tag">Standard</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('five-star-traders')">
+                            <div class="preset-emoji">⭐</div>
+                            <h3 class="preset-name">Five Star Traders</h3>
+                            <p class="preset-desc">Style The5ers - Pour traders agressifs</p>
+                            <div class="preset-tags">
+                                <span class="tag">Agressif</span>
+                                <span class="tag">100% Split</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('next-level-funding')">
+                            <div class="preset-emoji">🚀</div>
+                            <h3 class="preset-name">Next Level Funding</h3>
+                            <p class="preset-desc">Style FundedNext - Rapide et flexible</p>
+                            <div class="preset-tags">
+                                <span class="tag">Instant</span>
+                                <span class="tag">Flexible</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('forex-masters')">
+                            <div class="preset-emoji">💎</div>
+                            <h3 class="preset-name">Forex Masters</h3>
+                            <p class="preset-desc">Style MyForexFunds - Pour les pros</p>
+                            <div class="preset-tags">
+                                <span class="tag">Pro</span>
+                                <span class="tag">Gros compte</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('fx-infinity')">
+                            <div class="preset-emoji">♾️</div>
+                            <h3 class="preset-name">FX Infinity</h3>
+                            <p class="preset-desc">Style FXIFY - Liberté maximale</p>
+                            <div class="preset-tags">
+                                <span class="tag">Débutant</span>
+                                <span class="tag">Liberal</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('elite-eight')">
+                            <div class="preset-emoji">👑</div>
+                            <h3 class="preset-name">Elite Eight</h3>
+                            <p class="preset-desc">Style E8 Funding - Pour l'élite</p>
+                            <div class="preset-tags">
+                                <span class="tag">Élite</span>
+                                <span class="tag">Strict</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('true-traders')">
+                            <div class="preset-emoji">✅</div>
+                            <h3 class="preset-name">True Traders</h3>
+                            <p class="preset-desc">Style True Forex Funds - Simplicité</p>
+                            <div class="preset-tags">
+                                <span class="tag">Simple</span>
+                                <span class="tag">Accessible</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('peak-traders')">
+                            <div class="preset-emoji">⛰️</div>
+                            <h3 class="preset-name">Peak Traders</h3>
+                            <p class="preset-desc">Style Apex - Sommet de performance</p>
+                            <div class="preset-tags">
+                                <span class="tag">Performance</span>
+                                <span class="tag">Équilibré</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Trading Styles -->
+                <div class="presets-content" id="tab-styles">
+                    <div class="presets-grid">
+                        <div class="preset-card" onclick="configurator.loadPreset('scalper-pro')">
+                            <div class="preset-emoji">⚡</div>
+                            <h3 class="preset-name">Scalper Pro</h3>
+                            <p class="preset-desc">Optimisé pour le scalping haute fréquence</p>
+                            <div class="preset-tags">
+                                <span class="tag">Scalping</span>
+                                <span class="tag">Rapide</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('swing-master')">
+                            <div class="preset-emoji">📊</div>
+                            <h3 class="preset-name">Swing Master</h3>
+                            <p class="preset-desc">Parfait pour le swing trading</p>
+                            <div class="preset-tags">
+                                <span class="tag">Swing</span>
+                                <span class="tag">Patient</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('day-trader')">
+                            <div class="preset-emoji">🌅</div>
+                            <h3 class="preset-name">Day Trader</h3>
+                            <p class="preset-desc">Configuration pour le day trading classique</p>
+                            <div class="preset-tags">
+                                <span class="tag">Day Trading</span>
+                                <span class="tag">Régulier</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('conservative')">
+                            <div class="preset-emoji">🛡️</div>
+                            <h3 class="preset-name">Trader Conservateur</h3>
+                            <p class="preset-desc">Risque minimal, progression stable</p>
+                            <div class="preset-tags">
+                                <span class="tag">Conservateur</span>
+                                <span class="tag">Sécurisé</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('aggressive')">
+                            <div class="preset-emoji">🔥</div>
+                            <h3 class="preset-name">Trader Agressif</h3>
+                            <p class="preset-desc">Risque élevé, profit maximum</p>
+                            <div class="preset-tags">
+                                <span class="tag">Agressif</span>
+                                <span class="tag">Profit Max</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Budget -->
+                <div class="presets-content" id="tab-budget">
+                    <div class="presets-grid">
+                        <div class="preset-card" onclick="configurator.loadPreset('starter-pack')">
+                            <div class="preset-emoji">🌱</div>
+                            <h3 class="preset-name">Pack Débutant</h3>
+                            <p class="preset-desc">Petit budget, parfait pour commencer - $2K</p>
+                            <div class="preset-tags">
+                                <span class="tag">Débutant</span>
+                                <span class="tag">$2K</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('intermediate')">
+                            <div class="preset-emoji">📈</div>
+                            <h3 class="preset-name">Pack Intermédiaire</h3>
+                            <p class="preset-desc">Budget moyen pour expérimentés - $25K</p>
+                            <div class="preset-tags">
+                                <span class="tag">Intermédiaire</span>
+                                <span class="tag">$25K</span>
+                            </div>
+                        </div>
+
+                        <div class="preset-card" onclick="configurator.loadPreset('pro-package')">
+                            <div class="preset-emoji">💼</div>
+                            <h3 class="preset-name">Pack Professionnel</h3>
+                            <p class="preset-desc">Gros budget pour professionnels - $100K</p>
+                            <div class="preset-tags">
+                                <span class="tag">Pro</span>
+                                <span class="tag">$100K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Custom Presets -->
+                <div class="presets-content" id="tab-custom">
+                    <div class="custom-presets-header">
+                        <p class="custom-presets-info">
+                            💡 Configurez votre compte parfait, puis sauvegardez-le pour le réutiliser plus tard !
+                        </p>
+                        <button class="btn-primary" id="savePresetBtn">
+                            <span>💾</span>
+                            <span>Sauvegarder la Configuration Actuelle</span>
+                        </button>
+                    </div>
+                    <div class="presets-grid" id="customPresetsContainer">
+                        <p class="no-presets">Aucun preset personnalisé sauvegardé</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons d'Actions Rapides -->
+            <div class="quick-actions">
+                <button class="action-btn" id="shareConfigBtn">
+                    <span class="action-icon">🔗</span>
+                    <span class="action-text">Partager cette Configuration</span>
+                </button>
+                <button class="action-btn" id="resetConfigBtn">
+                    <span class="action-icon">🔄</span>
+                    <span class="action-text">Réinitialiser</span>
+                </button>
+            </div>
+
+            <!-- FIN SECTION PRESETS -->
+            
             <div class="configurator-layout">
                 <!-- Left Panel - Configuration -->
                 <div class="config-panel">
@@ -361,16 +598,82 @@ if (!in_array($accountType, $validTypes)) {
         </div>
     </main>
 
+    <!-- Scripts -->
+    <script src="js/presets.js"></script>
     <script src="js/configurator.js"></script>
+    <script>
+        // Script pour les tabs et actions
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gestion des tabs
+            document.querySelectorAll('.preset-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Désactiver tous les tabs
+                    document.querySelectorAll('.preset-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.presets-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Activer le tab cliqué
+                    tab.classList.add('active');
+                    const tabName = tab.dataset.tab;
+                    document.getElementById(`tab-${tabName}`).classList.add('active');
+                });
+            });
+
+            // Bouton Sauvegarder Preset
+            document.getElementById('savePresetBtn').addEventListener('click', () => {
+                const name = prompt('Donnez un nom à ce preset :');
+                if (name && name.trim()) {
+                    configurator.saveCustomPreset(name.trim());
+                }
+            });
+
+            // Bouton Partager
+            document.getElementById('shareConfigBtn').addEventListener('click', () => {
+                configurator.generateShareLink();
+            });
+
+            // Bouton Réinitialiser
+            document.getElementById('resetConfigBtn').addEventListener('click', () => {
+                if (confirm('Réinitialiser la configuration ?')) {
+                    location.reload();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 ```
 
 ---
 
-## ✅ Fichier `configurator.php` Terminé !
+## ✅ Fichier Terminé !
 
-Maintenant tu as :
+Maintenant tu as le fichier `configurator.php` complet avec :
+
+✅ Section presets en haut
+✅ 4 onglets (PropFirms, Styles, Budget, Custom)
+✅ Boutons d'actions (Partager, Réinitialiser)
+✅ Formulaire de configuration complet
+✅ Scripts intégrés
+
+---
+
+## 🧪 Tester
+
+1. **Upload le fichier** sur InfinityFree
+2. **Va sur** : `http://dojifunding.rf.gd/configurator.php`
+3. **Tu devrais voir** :
+   - Section presets en haut
+   - 8 presets PropFirms
+   - Navigation par onglets
+   - Formulaire de configuration en dessous
+
+---
+
+## 📋 Checklist Finale
+
+Vérifie que tu as bien **TOUS ces fichiers** :
 ```
-✅ public/index.php (380 lignes)
-✅ public/configurator.php (330 lignes)
+✅ public/js/presets.js (nouveau)
+✅ public/js/configurator.js (modifié)
+✅ public/configurator.php (modifié - ce fichier)
+✅ public/css/style.css (à modifier - styles des presets)
