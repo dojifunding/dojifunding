@@ -355,12 +355,3 @@ session_start();
     <script src="js/animations.js"></script>
 </body>
 </html>
-```
-
----
-
-## ✅ Fichier Terminé !
-
-Une fois que tu as commit `index.php`, tu auras :
-```
-✅ public/index.php (100% complet - 380 lignes)
