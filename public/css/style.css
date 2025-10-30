@@ -1220,7 +1220,205 @@ body {
     font-size: var(--font-size-lg);
     color: var(--neon-green);
 }
+/* ============================================
+   PROMO CODE SECTION
+   ============================================ */
 
+.promo-section {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: rgba(13, 249, 13, 0.05);
+    border: 1px solid rgba(13, 249, 13, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.promo-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.promo-icon {
+    font-size: var(--font-size-lg);
+}
+
+.promo-input-group {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.promo-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: rgba(10, 10, 20, 0.8);
+    border: 2px solid rgba(13, 249, 13, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--white);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--transition-base);
+}
+
+.promo-input::placeholder {
+    color: var(--gray);
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: normal;
+}
+
+.promo-input:focus {
+    outline: none;
+    border-color: var(--neon-green);
+    box-shadow: var(--glow-neon);
+}
+
+.btn-promo {
+    padding: 0.75rem 1.5rem;
+    background: var(--neon-green);
+    color: var(--black);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition-base);
+    white-space: nowrap;
+}
+
+.btn-promo:hover {
+    background: var(--neon-green-light);
+    box-shadow: var(--glow-neon-strong);
+    transform: translateY(-2px);
+}
+
+.btn-promo:active {
+    transform: translateY(0);
+}
+
+.promo-message {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 600;
+    transition: var(--transition-base);
+}
+
+.promo-message.success {
+    color: var(--neon-green);
+    background: rgba(13, 249, 13, 0.1);
+    animation: slideInRight 0.3s ease;
+}
+
+.promo-message.error {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    animation: shake 0.5s ease;
+}
+
+.promo-applied {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(13, 249, 13, 0.15);
+    border: 2px solid var(--neon-green);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glow-neon);
+}
+
+.promo-applied-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.promo-applied-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--neon-green);
+    color: var(--black);
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: var(--font-size-sm);
+}
+
+.promo-applied-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.promo-applied-text strong {
+    color: var(--neon-green);
+    font-size: var(--font-size-base);
+    letter-spacing: 2px;
+}
+
+.promo-applied-text span {
+    color: var(--white);
+    font-size: var(--font-size-sm);
+}
+
+.btn-promo-remove {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.btn-promo-remove:hover {
+    background: #ff4444;
+    color: var(--white);
+    transform: rotate(90deg);
+}
+
+.price-original {
+    font-size: var(--font-size-xl);
+    color: var(--gray);
+    opacity: 0.6;
+    margin-top: var(--spacing-xs);
+}
+
+/* Animation shake pour erreur */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Animation pour le prix qui change */
+@keyframes priceChange {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.price-amount.updating {
+    animation: priceChange 0.3s ease;
+}
 /* ============================================
    PRESETS SECTION
    ============================================ */
