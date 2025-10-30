@@ -699,47 +699,66 @@ const PromoCodes = {
         appliedDiv.style.display = 'block';
     },
 
-    updatePrice() {
-        // Recalculer le prix de base
-        const basePrice = configurator.calculatePrice();
-        this.originalPrice = basePrice;
+updatePrice() {
+    // Vérifier que configurator existe et a la méthode calculatePrice
+    if (!configurator || typeof configurator.calculatePrice !== 'function') {
+        console.error('Configurator non initialisé');
+        return;
+    }
 
-        let finalPrice = basePrice;
-        const originalPriceEl = document.getElementById('originalPrice');
-        const priceEl = document.getElementById('totalPrice');
+    // Recalculer le prix de base
+    const basePrice = configurator.calculatePrice();
+    
+    // Vérifier que le prix est valide
+    if (isNaN(basePrice) || basePrice <= 0) {
+        console.error('Prix de base invalide:', basePrice);
+        return;
+    }
 
-        if (!priceEl) return;
+    this.originalPrice = basePrice;
 
-        if (this.currentPromo) {
-            // Appliquer la réduction
-            if (this.currentPromo.type === 'percentage') {
-                finalPrice = basePrice * (1 - this.currentPromo.value / 100);
-            } else {
-                finalPrice = basePrice - this.currentPromo.value;
-            }
+    let finalPrice = basePrice;
+    const originalPriceEl = document.getElementById('originalPrice');
+    const priceEl = document.getElementById('totalPrice');
 
-            // Afficher le prix original barré
-            if (originalPriceEl) {
-                originalPriceEl.innerHTML = `<del>$${Math.round(basePrice)}</del>`;
-                originalPriceEl.style.display = 'block';
-            }
+    if (!priceEl) return;
+
+    if (this.currentPromo) {
+        // Appliquer la réduction
+        if (this.currentPromo.type === 'percentage') {
+            finalPrice = basePrice * (1 - this.currentPromo.value / 100);
         } else {
-            if (originalPriceEl) {
-                originalPriceEl.style.display = 'none';
-            }
+            finalPrice = basePrice - this.currentPromo.value;
         }
 
-        // S'assurer que le prix ne soit jamais négatif
-        finalPrice = Math.max(0, finalPrice);
+        // Afficher le prix original barré
+        if (originalPriceEl) {
+            originalPriceEl.innerHTML = `<del>$${Math.round(basePrice)}</del>`;
+            originalPriceEl.style.display = 'block';
+        }
+    } else {
+        if (originalPriceEl) {
+            originalPriceEl.style.display = 'none';
+        }
+    }
 
-        // Mettre à jour l'affichage avec animation
-        priceEl.classList.add('updating');
-        
-        setTimeout(() => {
-            priceEl.textContent = '$' + Math.round(finalPrice);
-            priceEl.classList.remove('updating');
-        }, 150);
-    },
+    // S'assurer que le prix ne soit jamais négatif
+    finalPrice = Math.max(0, finalPrice);
+
+    // Vérifier que le prix final est valide
+    if (isNaN(finalPrice)) {
+        console.error('Prix final invalide');
+        return;
+    }
+
+    // Mettre à jour l'affichage avec animation
+    priceEl.classList.add('updating');
+    
+    setTimeout(() => {
+        priceEl.textContent = '$' + Math.round(finalPrice);
+        priceEl.classList.remove('updating');
+    }, 150);
+}
 
     showMessage(message, type) {
         const messageEl = document.getElementById('promoMessage');
