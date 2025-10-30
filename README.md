@@ -70,8 +70,4 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 👤 Auteur
 
-**Phidias PropFirm**
-
----
-
-⭐ N'hésitez pas à mettre une étoile si ce projet vous plaît !
+**Volatys Dynamics Limited**
