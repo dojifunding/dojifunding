@@ -18,24 +18,86 @@ class DojiConfigurator {
             leverage: 100,
             maxLotSize: 5
         };
-        
-        // Prix de base pour chaque type de compte (pour 10K)
-        this.basePrices = {
-            '2steps': 100,
-            '3steps': 120,
-            'instant': 500
-        };
-        
         this.init();
     }
-    
+
     init() {
-        this.bindEvents();
-        this.loadFromURL(); // Charger depuis l'URL si présent
-        this.updateSummary();
-        this.calculatePrice();
-        this.renderCustomPresets(); // Afficher les presets personnalisés
+        // ... code existant ...
     }
+
+    // AJOUTE CETTE MÉTHODE SI ELLE N'EXISTE PAS
+    calculatePrice() {
+        let basePrice = 100;
+        
+        // Prix selon la taille du compte
+        const sizeMultiplier = this.config.accountSize / 10000;
+        basePrice *= sizeMultiplier;
+        
+        // Ajustement selon le type de compte
+        const typeMultipliers = {
+            '2steps': 1.0,
+            '3steps': 0.8,
+            'instant': 1.5
+        };
+        basePrice *= typeMultipliers[this.config.accountType] || 1.0;
+        
+        // Ajustement selon le système de risque
+        const riskMultipliers = {
+            'trailing': 1.0,
+            'eod': 1.2,
+            'static': 1.5
+        };
+        basePrice *= riskMultipliers[this.config.riskSystem] || 1.0;
+        
+        // Target de profit (plus c'est haut, moins c'est cher)
+        basePrice *= (1 - (this.config.profitTarget - 10) * 0.02);
+        
+        // Drawdown (plus c'est haut, plus c'est cher)
+        basePrice *= (1 + (this.config.maxDrawdown - 5) * 0.03);
+        
+        // Consistency
+        if (this.config.consistency !== 'none') {
+            const consistencyValue = parseInt(this.config.consistency);
+            basePrice *= (1 - consistencyValue * 0.005);
+        }
+        
+        // Profit Split (plus c'est haut, plus c'est cher)
+        basePrice *= (this.config.profitSplit / 80);
+        
+        // Jours de trading (plus il y en a, moins c'est cher)
+        basePrice *= (1 - this.config.evalDays * 0.01);
+        basePrice *= (1 - this.config.fundedDays * 0.01);
+        
+        // Levier (plus c'est haut, moins c'est cher)
+        basePrice *= (1 - Math.log10(this.config.leverage) * 0.05);
+        
+        // Lot size (plus c'est haut, plus c'est cher)
+        basePrice *= (1 + this.config.maxLotSize * 0.02);
+        
+        // S'assurer que le prix est positif et raisonnable
+        return Math.max(49, Math.round(basePrice));
+    }
+
+    updatePrice() {
+        const price = this.calculatePrice();
+        const priceEl = document.getElementById('totalPrice');
+        
+        if (priceEl) {
+            priceEl.textContent = '$' + Math.round(price);
+        }
+        
+        this.updateSummary();
+        
+        // Mettre à jour le prix avec le promo si appliqué
+        if (typeof PromoCodes !== 'undefined' && PromoCodes.currentPromo) {
+            setTimeout(() => {
+                PromoCodes.updatePrice();
+            }, 50);
+        }
+    }
+
+    // ... reste des méthodes ...
+}
     
     bindEvents() {
         // Type de compte
