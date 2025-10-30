@@ -18,82 +18,23 @@ class DojiConfigurator {
             leverage: 100,
             maxLotSize: 5
         };
+        
+        // Prix de base pour chaque type de compte (pour 10K)
+        this.basePrices = {
+            '2steps': 100,
+            '3steps': 120,
+            'instant': 500
+        };
+        
         this.init();
     }
-
+    
     init() {
-        // ... code existant ...
-    }
-
-    // AJOUTE CETTE MÉTHODE SI ELLE N'EXISTE PAS
-    calculatePrice() {
-        let basePrice = 100;
-        
-        // Prix selon la taille du compte
-        const sizeMultiplier = this.config.accountSize / 10000;
-        basePrice *= sizeMultiplier;
-        
-        // Ajustement selon le type de compte
-        const typeMultipliers = {
-            '2steps': 1.0,
-            '3steps': 0.8,
-            'instant': 1.5
-        };
-        basePrice *= typeMultipliers[this.config.accountType] || 1.0;
-        
-        // Ajustement selon le système de risque
-        const riskMultipliers = {
-            'trailing': 1.0,
-            'eod': 1.2,
-            'static': 1.5
-        };
-        basePrice *= riskMultipliers[this.config.riskSystem] || 1.0;
-        
-        // Target de profit (plus c'est haut, moins c'est cher)
-        basePrice *= (1 - (this.config.profitTarget - 10) * 0.02);
-        
-        // Drawdown (plus c'est haut, plus c'est cher)
-        basePrice *= (1 + (this.config.maxDrawdown - 5) * 0.03);
-        
-        // Consistency
-        if (this.config.consistency !== 'none') {
-            const consistencyValue = parseInt(this.config.consistency);
-            basePrice *= (1 - consistencyValue * 0.005);
-        }
-        
-        // Profit Split (plus c'est haut, plus c'est cher)
-        basePrice *= (this.config.profitSplit / 80);
-        
-        // Jours de trading (plus il y en a, moins c'est cher)
-        basePrice *= (1 - this.config.evalDays * 0.01);
-        basePrice *= (1 - this.config.fundedDays * 0.01);
-        
-        // Levier (plus c'est haut, moins c'est cher)
-        basePrice *= (1 - Math.log10(this.config.leverage) * 0.05);
-        
-        // Lot size (plus c'est haut, plus c'est cher)
-        basePrice *= (1 + this.config.maxLotSize * 0.02);
-        
-        // S'assurer que le prix est positif et raisonnable
-        return Math.max(49, Math.round(basePrice));
-    }
-
-    updatePrice() {
-        const price = this.calculatePrice();
-        const priceEl = document.getElementById('totalPrice');
-        
-        if (priceEl) {
-            priceEl.textContent = '$' + Math.round(price);
-        }
-        
+        this.bindEvents();
+        this.loadFromURL(); // Charger depuis l'URL si présent
         this.updateSummary();
-        
-        // Mettre à jour le prix avec le promo si appliqué
-        if (typeof PromoCodes !== 'undefined' && PromoCodes.currentPromo) {
-            setTimeout(() => {
-                PromoCodes.updatePrice();
-            }, 50);
-        }
+        this.calculatePrice();
+        this.renderCustomPresets(); // Afficher les presets personnalisés
     }
     
     bindEvents() {
@@ -758,66 +699,47 @@ const PromoCodes = {
         appliedDiv.style.display = 'block';
     },
 
-updatePrice() {
-    // Vérifier que configurator existe et a la méthode calculatePrice
-    if (!configurator || typeof configurator.calculatePrice !== 'function') {
-        console.error('Configurator non initialisé');
-        return;
-    }
+    updatePrice() {
+        // Recalculer le prix de base
+        const basePrice = configurator.calculatePrice();
+        this.originalPrice = basePrice;
 
-    // Recalculer le prix de base
-    const basePrice = configurator.calculatePrice();
-    
-    // Vérifier que le prix est valide
-    if (isNaN(basePrice) || basePrice <= 0) {
-        console.error('Prix de base invalide:', basePrice);
-        return;
-    }
+        let finalPrice = basePrice;
+        const originalPriceEl = document.getElementById('originalPrice');
+        const priceEl = document.getElementById('totalPrice');
 
-    this.originalPrice = basePrice;
+        if (!priceEl) return;
 
-    let finalPrice = basePrice;
-    const originalPriceEl = document.getElementById('originalPrice');
-    const priceEl = document.getElementById('totalPrice');
+        if (this.currentPromo) {
+            // Appliquer la réduction
+            if (this.currentPromo.type === 'percentage') {
+                finalPrice = basePrice * (1 - this.currentPromo.value / 100);
+            } else {
+                finalPrice = basePrice - this.currentPromo.value;
+            }
 
-    if (!priceEl) return;
-
-    if (this.currentPromo) {
-        // Appliquer la réduction
-        if (this.currentPromo.type === 'percentage') {
-            finalPrice = basePrice * (1 - this.currentPromo.value / 100);
+            // Afficher le prix original barré
+            if (originalPriceEl) {
+                originalPriceEl.innerHTML = `<del>$${Math.round(basePrice)}</del>`;
+                originalPriceEl.style.display = 'block';
+            }
         } else {
-            finalPrice = basePrice - this.currentPromo.value;
+            if (originalPriceEl) {
+                originalPriceEl.style.display = 'none';
+            }
         }
 
-        // Afficher le prix original barré
-        if (originalPriceEl) {
-            originalPriceEl.innerHTML = `<del>$${Math.round(basePrice)}</del>`;
-            originalPriceEl.style.display = 'block';
-        }
-    } else {
-        if (originalPriceEl) {
-            originalPriceEl.style.display = 'none';
-        }
-    }
+        // S'assurer que le prix ne soit jamais négatif
+        finalPrice = Math.max(0, finalPrice);
 
-    // S'assurer que le prix ne soit jamais négatif
-    finalPrice = Math.max(0, finalPrice);
-
-    // Vérifier que le prix final est valide
-    if (isNaN(finalPrice)) {
-        console.error('Prix final invalide');
-        return;
-    }
-
-    // Mettre à jour l'affichage avec animation
-    priceEl.classList.add('updating');
-    
-    setTimeout(() => {
-        priceEl.textContent = '$' + Math.round(finalPrice);
-        priceEl.classList.remove('updating');
-    }, 150);
-}
+        // Mettre à jour l'affichage avec animation
+        priceEl.classList.add('updating');
+        
+        setTimeout(() => {
+            priceEl.textContent = '$' + Math.round(finalPrice);
+            priceEl.classList.remove('updating');
+        }, 150);
+    },
 
     showMessage(message, type) {
         const messageEl = document.getElementById('promoMessage');
