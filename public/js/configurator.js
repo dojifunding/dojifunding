@@ -528,7 +528,259 @@ class DojiConfigurator {
 // Variable globale pour accès externe
 let configurator;
 
-// Initialiser le configurateur au chargement de la page
+// ============================================
+// SYSTÈME DE CODE PROMO
+// ============================================
+
+const PromoCodes = {
+    // Codes promo disponibles
+    codes: {
+        'WELCOME10': {
+            type: 'percentage',
+            value: 10,
+            description: 'Réduction de bienvenue'
+        },
+        'LAUNCH50': {
+            type: 'percentage',
+            value: 50,
+            description: 'Offre de lancement'
+        },
+        'FIRST20': {
+            type: 'percentage',
+            value: 20,
+            description: 'Première évaluation'
+        },
+        'VIP30': {
+            type: 'percentage',
+            value: 30,
+            description: 'Code VIP'
+        },
+        'SAVE15': {
+            type: 'percentage',
+            value: 15,
+            description: 'Économisez maintenant'
+        },
+        'TRADER25': {
+            type: 'percentage',
+            value: 25,
+            description: 'Offre trader'
+        },
+        'BLACKFRIDAY': {
+            type: 'percentage',
+            value: 40,
+            description: 'Black Friday'
+        },
+        'NEWYEAR': {
+            type: 'percentage',
+            value: 35,
+            description: 'Nouvel An'
+        },
+        'FREE50': {
+            type: 'fixed',
+            value: 50,
+            description: '50$ de réduction'
+        },
+        'SAVE100': {
+            type: 'fixed',
+            value: 100,
+            description: '100$ de réduction'
+        }
+    },
+
+    currentPromo: null,
+    originalPrice: 0,
+
+    init() {
+        this.originalPrice = configurator.calculatePrice();
+        
+        // Event listener sur le bouton Appliquer
+        const applyBtn = document.getElementById('applyPromoBtn');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', () => {
+                this.applyPromo();
+            });
+        }
+
+        // Event listener sur la touche Entrée dans l'input
+        const promoInput = document.getElementById('promoCode');
+        if (promoInput) {
+            promoInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.applyPromo();
+                }
+            });
+        }
+
+        // Event listener sur le bouton Retirer
+        const removeBtn = document.getElementById('removePromoBtn');
+        if (removeBtn) {
+            removeBtn.addEventListener('click', () => {
+                this.removePromo();
+            });
+        }
+    },
+
+    applyPromo() {
+        const input = document.getElementById('promoCode');
+        const code = input.value.trim().toUpperCase();
+        
+        if (!code) {
+            this.showMessage('Veuillez entrer un code promo', 'error');
+            return;
+        }
+
+        const promo = this.codes[code];
+        
+        if (!promo) {
+            this.showMessage('❌ Code promo invalide', 'error');
+            input.value = '';
+            return;
+        }
+
+        // Sauvegarder le promo actuel
+        this.currentPromo = {
+            code: code,
+            ...promo
+        };
+
+        // Afficher le promo appliqué
+        this.showAppliedPromo();
+
+        // Recalculer le prix
+        this.updatePrice();
+
+        // Message de succès
+        const discount = promo.type === 'percentage' 
+            ? `${promo.value}%` 
+            : `$${promo.value}`;
+        this.showMessage(`✓ Code "${code}" appliqué ! ${discount} de réduction`, 'success');
+
+        // Vider l'input
+        input.value = '';
+    },
+
+    removePromo() {
+        this.currentPromo = null;
+        
+        // Cacher la section "promo appliqué"
+        const appliedDiv = document.getElementById('promoApplied');
+        if (appliedDiv) {
+            appliedDiv.style.display = 'none';
+        }
+        
+        // Cacher le prix original
+        const originalPriceEl = document.getElementById('originalPrice');
+        if (originalPriceEl) {
+            originalPriceEl.style.display = 'none';
+        }
+
+        // Recalculer le prix
+        this.updatePrice();
+
+        // Message
+        this.showMessage('Code promo retiré', 'error');
+    },
+
+    showAppliedPromo() {
+        const appliedDiv = document.getElementById('promoApplied');
+        const nameSpan = document.getElementById('appliedPromoName');
+        const discountSpan = document.getElementById('appliedPromoDiscount');
+
+        if (!appliedDiv || !nameSpan || !discountSpan) return;
+
+        nameSpan.textContent = this.currentPromo.code;
+        
+        if (this.currentPromo.type === 'percentage') {
+            discountSpan.textContent = `-${this.currentPromo.value}%`;
+        } else {
+            discountSpan.textContent = `-$${this.currentPromo.value}`;
+        }
+
+        appliedDiv.style.display = 'block';
+    },
+
+    updatePrice() {
+        // Recalculer le prix de base
+        const basePrice = configurator.calculatePrice();
+        this.originalPrice = basePrice;
+
+        let finalPrice = basePrice;
+        const originalPriceEl = document.getElementById('originalPrice');
+        const priceEl = document.getElementById('totalPrice');
+
+        if (!priceEl) return;
+
+        if (this.currentPromo) {
+            // Appliquer la réduction
+            if (this.currentPromo.type === 'percentage') {
+                finalPrice = basePrice * (1 - this.currentPromo.value / 100);
+            } else {
+                finalPrice = basePrice - this.currentPromo.value;
+            }
+
+            // Afficher le prix original barré
+            if (originalPriceEl) {
+                originalPriceEl.innerHTML = `<del>$${Math.round(basePrice)}</del>`;
+                originalPriceEl.style.display = 'block';
+            }
+        } else {
+            if (originalPriceEl) {
+                originalPriceEl.style.display = 'none';
+            }
+        }
+
+        // S'assurer que le prix ne soit jamais négatif
+        finalPrice = Math.max(0, finalPrice);
+
+        // Mettre à jour l'affichage avec animation
+        priceEl.classList.add('updating');
+        
+        setTimeout(() => {
+            priceEl.textContent = '$' + Math.round(finalPrice);
+            priceEl.classList.remove('updating');
+        }, 150);
+    },
+
+    showMessage(message, type) {
+        const messageEl = document.getElementById('promoMessage');
+        if (!messageEl) return;
+
+        messageEl.textContent = message;
+        messageEl.className = `promo-message ${type}`;
+
+        // Effacer le message après 3 secondes
+        setTimeout(() => {
+            messageEl.textContent = '';
+            messageEl.className = 'promo-message';
+        }, 3000);
+    },
+
+    // Méthode pour obtenir le prix final avec promo
+    getFinalPrice() {
+        const basePrice = configurator.calculatePrice();
+        
+        if (!this.currentPromo) {
+            return basePrice;
+        }
+
+        let finalPrice = basePrice;
+        
+        if (this.currentPromo.type === 'percentage') {
+            finalPrice = basePrice * (1 - this.currentPromo.value / 100);
+        } else {
+            finalPrice = basePrice - this.currentPromo.value;
+        }
+
+        return Math.max(0, Math.round(finalPrice));
+    }
+};
+
+// Initialiser le configurateur et le système promo au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
     configurator = new DojiConfigurator();
+    
+    // Initialiser le système de promo après un court délai
+    setTimeout(() => {
+        PromoCodes.init();
+    }, 100);
 });
