@@ -95,9 +95,6 @@ class DojiConfigurator {
             }, 50);
         }
     }
-
-    // ... reste des méthodes ...
-}
     
     bindEvents() {
         // Type de compte
