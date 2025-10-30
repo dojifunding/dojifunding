@@ -520,7 +520,43 @@ if (!in_array($accountType, $validTypes)) {
                         <div class="price-display">
                             <div class="price-label">Prix Total</div>
                             <div class="price-amount" id="totalPrice">$249</div>
+                            <div class="price-original" id="originalPrice" style="display: none;">
+                                <del>$299</del>
+                            </div>
                             <div class="price-note">Paiement unique</div>
+                        </div>
+
+                        <!-- Code Promo Section -->
+                        <div class="promo-section">
+                            <label class="promo-label">
+                                <span class="promo-icon">🎟️</span>
+                                <span>Code Promo</span>
+                            </label>
+                            <div class="promo-input-group">
+                                <input 
+                                    type="text" 
+                                    id="promoCode" 
+                                    class="promo-input" 
+                                    placeholder="Entrez votre code"
+                                    maxlength="20"
+                                >
+                                <button type="button" id="applyPromoBtn" class="btn-promo">
+                                    Appliquer
+                                </button>
+                            </div>
+                            <div class="promo-message" id="promoMessage"></div>
+                            <div class="promo-applied" id="promoApplied" style="display: none;">
+                                <div class="promo-applied-content">
+                                    <span class="promo-applied-icon">✓</span>
+                                    <span class="promo-applied-text">
+                                        <strong id="appliedPromoName">WELCOME10</strong>
+                                        <span id="appliedPromoDiscount">-10%</span>
+                                    </span>
+                                    <button type="button" id="removePromoBtn" class="btn-promo-remove">
+                                        ✕
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="summary-details">
