@@ -23,7 +23,7 @@ session_start();
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
-                <h1>DOJI <span class="logo-accent">FUNDING</span></h1>
+                <h1><span class="metal-text">D</span><span class="logo-accent">OJI</span> <span class="logo-accent">FUNDING</span></h1>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Accueil</a></li>
