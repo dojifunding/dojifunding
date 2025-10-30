@@ -1249,13 +1249,13 @@ body {
 }
 
 .promo-input-group {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
 }
 
 .promo-input {
-    flex: 1;
     padding: 0.75rem 1rem;
     background: rgba(10, 10, 20, 0.8);
     border: 2px solid rgba(13, 249, 13, 0.2);
@@ -1266,6 +1266,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: var(--transition-base);
+    height: 50px; /* Hauteur fixe */
 }
 
 .promo-input::placeholder {
@@ -1282,7 +1283,7 @@ body {
 }
 
 .btn-promo {
-    padding: 0.75rem 1.5rem;
+    padding: 0 2rem;
     background: var(--neon-green);
     color: var(--black);
     border: none;
@@ -1290,19 +1291,49 @@ body {
     font-weight: 700;
     font-size: var(--font-size-sm);
     text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: var(--transition-base);
     white-space: nowrap;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Effet néon pulsé au hover */
 .btn-promo:hover {
     background: var(--neon-green-light);
-    box-shadow: var(--glow-neon-strong);
+    box-shadow: 
+        var(--glow-neon-strong),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
 
+/* Effet au clic */
 .btn-promo:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.98);
+}
+
+/* Animation de ripple au clic */
+.btn-promo::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-promo:active::after {
+    width: 300px;
+    height: 300px;
 }
 
 .promo-message {
@@ -1811,6 +1842,17 @@ body {
     
     .tab-name {
         font-size: var(--font-size-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-input-group {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .btn-promo {
+        width: 100%;
     }
 }
 
