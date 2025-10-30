@@ -29,7 +29,7 @@ if (!in_array($accountType, $validTypes)) {
         <nav class="nav-container">
             <div class="logo">
                 <a href="index.php">
-                    <h1>DOJI <span class="logo-accent">FUNDING</span></h1>
+                    <h1><span class="metal-text">D</span><span class="logo-accent">OJI</span> <span class="logo-accent">FUNDING</span></h1>
                 </a>
             </div>
             <div class="nav-actions">
