@@ -1250,25 +1250,24 @@ body {
 
 .promo-input-group {
     display: flex;
+    flex-direction: column; /* Bouton en dessous */
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
-    width: 100%;
 }
 
 .promo-input {
-    flex: 1;
-    min-width: 0; /* Important pour flexbox */
+    width: 100%;
     padding: 0.75rem 1rem;
     background: rgba(10, 10, 20, 0.8);
     border: 2px solid rgba(13, 249, 13, 0.2);
     border-radius: var(--radius-md);
     color: var(--white);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: var(--transition-base);
-    height: 44px;
+    height: 48px;
 }
 
 .promo-input::placeholder {
@@ -1276,7 +1275,6 @@ body {
     text-transform: none;
     letter-spacing: normal;
     font-weight: normal;
-    font-size: var(--font-size-sm);
 }
 
 .promo-input:focus {
@@ -1286,29 +1284,32 @@ body {
 }
 
 .btn-promo {
-    flex-shrink: 0; /* Empêche le bouton de rétrécir */
-    padding: 0 1.25rem;
+    width: 100%; /* Pleine largeur */
+    padding: 0.75rem 1.5rem;
     background: var(--neon-green);
     color: var(--black);
     border: none;
     border-radius: var(--radius-md);
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: var(--font-size-base);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: var(--transition-base);
-    white-space: nowrap;
-    height: 44px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-promo:hover {
     background: var(--neon-green-light);
-    box-shadow: var(--glow-neon);
+    box-shadow: var(--glow-neon-strong);
+    transform: translateY(-2px);
 }
 
 .btn-promo:active {
-    transform: scale(0.98);
+    transform: translateY(0) scale(0.98);
 }
 
 .promo-message {
