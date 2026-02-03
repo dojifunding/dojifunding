@@ -1,5 +1,5 @@
 /**
- * Doji Funding - Dark Theme avec Néon Vert
+ * Doji Funding - Dark Theme avec Turquoise Doji
  * Charte graphique futuriste
  */
 
@@ -8,25 +8,25 @@
    ============================================ */
 :root {
     /* Couleurs principales */
-    --neon-green: #0df90d;
-    --neon-green-dark: #0a8f0a;
-    --neon-green-light: #3dff3d;
-    --black: #020209;
-    --black-light: #0a0a14;
-    --black-lighter: #141420;
+    --doji-teal: #2DD4BF;
+    --doji-teal-dark: #1da89a;
+    --doji-teal-light: #5EEAD4;
+    --deep-navy: #0A1628;
+    --navy-medium: #0F2137;
+    --navy-light: #132743;
     --gray: #808080;
     --gray-light: #a0a0a0;
     --gray-dark: #404040;
     --white: #ffffff;
     
     /* Gradients */
-    --gradient-neon: linear-gradient(135deg, #0df90d 0%, #3dff3d 100%);
+    --gradient-neon: linear-gradient(135deg, #2DD4BF 0%, #5EEAD4 100%);
     --gradient-metal: linear-gradient(135deg, #404040 0%, #808080 50%, #404040 100%);
-    --gradient-dark: linear-gradient(180deg, #020209 0%, #0a0a14 100%);
+    --gradient-dark: linear-gradient(180deg, #0A1628 0%, #0F2137 100%);
     
     /* Ombres et effets néon */
-    --glow-neon: 0 0 5px rgba(13, 249, 13, 0.3), 0 0 10px rgba(13, 249, 13, 0.2);
-    --glow-neon-strong: 0 0 5px rgba(13, 249, 13, 0.3), 0 0 10px rgba(13, 249, 13, 0.2);
+    --glow-neon: 0 0 5px rgba(45, 212, 191, 0.3), 0 0 10px rgba(45, 212, 191, 0.2);
+    --glow-neon-strong: 0 0 5px rgba(45, 212, 191, 0.3), 0 0 10px rgba(45, 212, 191, 0.2);
     --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
     --shadow-dark-strong: 0 20px 50px rgba(0, 0, 0, 0.7);
     
@@ -82,14 +82,14 @@ body {
     font-size: var(--font-size-base);
     line-height: 1.6;
     color: var(--white);
-    background: var(--black);
+    background: var(--deep-navy);
     overflow-x: hidden;
 }
 
 /* Sélection de texte */
 ::selection {
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
 }
 
 /* ============================================
@@ -132,14 +132,14 @@ body {
     z-index: 1000;
     background: rgba(2, 2, 9, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(13, 249, 13, 0.1);
+    border-bottom: 1px solid rgba(45, 212, 191, 0.1);
     transition: var(--transition-base);
 }
 
 .header-compact {
     position: relative;
-    background: var(--black);
-    border-bottom: 1px solid var(--black-lighter);
+    background: var(--deep-navy);
+    border-bottom: 1px solid var(--navy-light);
 }
 
 .nav-container {
@@ -167,7 +167,7 @@ body {
 }
 
 .logo-accent {
-    color: var(--neon-green);
+    color: var(--doji-teal);
     text-shadow: var(--glow-neon);
 }
 
@@ -190,7 +190,7 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--neon-green);
+    color: var(--doji-teal);
     text-shadow: var(--glow-neon);
 }
 
@@ -201,7 +201,7 @@ body {
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--neon-green);
+    background: var(--doji-teal);
     box-shadow: var(--glow-neon);
 }
 
@@ -231,26 +231,26 @@ body {
 }
 
 .btn-primary {
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
     box-shadow: var(--glow-neon);
 }
 
 .btn-primary:hover {
-    background: var(--neon-green-light);
+    background: var(--doji-teal-light);
     transform: translateY(-2px);
     box-shadow: var(--glow-neon-strong);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--neon-green);
-    border: 2px solid var(--neon-green);
+    color: var(--doji-teal);
+    border: 2px solid var(--doji-teal);
 }
 
 .btn-secondary:hover {
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
     transform: translateY(-2px);
     box-shadow: var(--glow-neon);
 }
@@ -322,7 +322,7 @@ body {
 .orb-1 {
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, var(--neon-green) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--doji-teal) 0%, transparent 70%);
     top: -300px;
     right: -300px;
 }
@@ -330,7 +330,7 @@ body {
 .orb-2 {
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, var(--neon-green) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--doji-teal) 0%, transparent 70%);
     bottom: -350px;
     left: -350px;
     animation-delay: -10s;
@@ -356,9 +356,9 @@ body {
     align-items: center;
     gap: var(--spacing-xs);
     padding: 0.5rem 1rem;
-    background: rgba(13, 249, 13, 0.1);
-    border: 1px solid var(--neon-green);
-    color: var(--neon-green);
+    background: rgba(45, 212, 191, 0.1);
+    border: 1px solid var(--doji-teal);
+    color: var(--doji-teal);
     border-radius: var(--radius-full);
     font-size: var(--font-size-sm);
     font-weight: 600;
@@ -402,7 +402,7 @@ body {
 .stat-number {
     font-size: var(--font-size-3xl);
     font-weight: 800;
-    color: var(--neon-green);
+    color: var(--doji-teal);
     text-shadow: var(--glow-neon);
 }
 
@@ -424,7 +424,7 @@ body {
     position: absolute;
     background: rgba(10, 10, 20, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(13, 249, 13, 0.2);
+    border: 1px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-xl);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-dark);
@@ -466,7 +466,7 @@ body {
     justify-content: center;
     background: var(--gradient-neon);
     border-radius: var(--radius-lg);
-    color: var(--black);
+    color: var(--deep-navy);
 }
 
 .card-content {
@@ -484,7 +484,7 @@ body {
 .card-value {
     font-size: var(--font-size-2xl);
     font-weight: 700;
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 /* ============================================
@@ -492,7 +492,7 @@ body {
    ============================================ */
 .features {
     padding: var(--spacing-2xl) 0;
-    background: var(--black-light);
+    background: var(--navy-medium);
 }
 
 .section-header {
@@ -525,13 +525,13 @@ body {
     background: rgba(10, 10, 20, 0.5);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(13, 249, 13, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.1);
     transition: var(--transition-base);
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
-    border-color: var(--neon-green);
+    border-color: var(--doji-teal);
     box-shadow: var(--glow-neon);
 }
 
@@ -544,7 +544,7 @@ body {
     font-size: var(--font-size-xl);
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 .feature-description {
@@ -557,7 +557,7 @@ body {
    ============================================ */
 .account-types {
     padding: var(--spacing-2xl) 0;
-    background: var(--black);
+    background: var(--deep-navy);
 }
 
 .account-types-grid {
@@ -568,15 +568,15 @@ body {
 
 .account-type-card {
     position: relative;
-    background: var(--black-lighter);
+    background: var(--navy-light);
     padding: var(--spacing-xl);
     border-radius: var(--radius-2xl);
-    border: 2px solid rgba(13, 249, 13, 0.1);
+    border: 2px solid rgba(45, 212, 191, 0.1);
     transition: var(--transition-base);
 }
 
 .account-type-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--doji-teal);
     transform: translateY(-5px);
     box-shadow: var(--glow-neon-strong);
 }
@@ -585,8 +585,8 @@ body {
     position: absolute;
     top: -12px;
     right: 20px;
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-full);
     font-size: var(--font-size-sm);
@@ -603,7 +603,7 @@ body {
     font-size: var(--font-size-2xl);
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 .account-description {
@@ -630,7 +630,7 @@ body {
    ============================================ */
 .how-it-works {
     padding: var(--spacing-2xl) 0;
-    background: var(--black-light);
+    background: var(--navy-medium);
 }
 
 .steps-container {
@@ -645,24 +645,24 @@ body {
     flex: 1;
     min-width: 200px;
     max-width: 250px;
-    background: var(--black-lighter);
+    background: var(--navy-light);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(13, 249, 13, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.1);
     text-align: center;
     transition: var(--transition-base);
 }
 
 .step:hover {
-    border-color: var(--neon-green);
+    border-color: var(--doji-teal);
     box-shadow: var(--glow-neon);
 }
 
 .step-number {
     width: 60px;
     height: 60px;
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -677,7 +677,7 @@ body {
     font-size: var(--font-size-xl);
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 .step-description {
@@ -687,7 +687,7 @@ body {
 
 .step-arrow {
     font-size: var(--font-size-3xl);
-    color: var(--neon-green);
+    color: var(--doji-teal);
     font-weight: 700;
 }
 
@@ -696,9 +696,9 @@ body {
    ============================================ */
 .cta-section {
     padding: var(--spacing-2xl) 0;
-    background: var(--black);
-    border-top: 1px solid rgba(13, 249, 13, 0.1);
-    border-bottom: 1px solid rgba(13, 249, 13, 0.1);
+    background: var(--deep-navy);
+    border-top: 1px solid rgba(45, 212, 191, 0.1);
+    border-bottom: 1px solid rgba(45, 212, 191, 0.1);
     text-align: center;
 }
 
@@ -725,10 +725,10 @@ body {
    FOOTER
    ============================================ */
 .footer {
-    background: var(--black-light);
+    background: var(--navy-medium);
     color: var(--white);
     padding: var(--spacing-2xl) 0 var(--spacing-lg);
-    border-top: 1px solid rgba(13, 249, 13, 0.1);
+    border-top: 1px solid rgba(45, 212, 191, 0.1);
 }
 
 .footer-content {
@@ -746,7 +746,7 @@ body {
 .footer-title {
     font-size: var(--font-size-xl);
     margin-bottom: var(--spacing-md);
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 .footer-description {
@@ -776,11 +776,11 @@ body {
 }
 
 .footer-links a:hover {
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(13, 249, 13, 0.1);
+    border-top: 1px solid rgba(45, 212, 191, 0.1);
     padding-top: var(--spacing-lg);
     display: flex;
     justify-content: space-between;
@@ -802,7 +802,7 @@ body {
 }
 
 .footer-legal a:hover {
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 /* ============================================
    CONFIGURATOR PAGE
@@ -828,7 +828,7 @@ body {
     background: rgba(10, 10, 20, 0.8);
     padding: var(--spacing-xl);
     border-radius: var(--radius-2xl);
-    border: 1px solid rgba(13, 249, 13, 0.2);
+    border: 1px solid rgba(45, 212, 191, 0.2);
     box-shadow: var(--shadow-dark);
 }
 
@@ -852,7 +852,7 @@ body {
 .config-section {
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-xl);
-    border-bottom: 1px solid rgba(13, 249, 13, 0.1);
+    border-bottom: 1px solid rgba(45, 212, 191, 0.1);
 }
 
 .config-section:last-child {
@@ -877,7 +877,7 @@ body {
 .label-value {
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: var(--neon-green);
+    color: var(--doji-teal);
     text-shadow: var(--glow-neon);
 }
 
@@ -899,22 +899,22 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
-    background: rgba(13, 249, 13, 0.05);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: var(--transition-base);
 }
 
 .type-btn:hover {
-    border-color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.1);
+    border-color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.1);
     box-shadow: var(--glow-neon);
 }
 
 .type-btn.active {
-    border-color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.2);
+    border-color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.2);
     box-shadow: var(--glow-neon-strong);
 }
 
@@ -934,7 +934,7 @@ body {
     width: 100%;
     height: 8px;
     border-radius: var(--radius-full);
-    background: rgba(13, 249, 13, 0.1);
+    background: rgba(45, 212, 191, 0.1);
     outline: none;
     -webkit-appearance: none;
     margin-bottom: var(--spacing-sm);
@@ -946,7 +946,7 @@ body {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--neon-green);
+    background: var(--doji-teal);
     cursor: pointer;
     box-shadow: var(--glow-neon);
 }
@@ -955,14 +955,14 @@ body {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--neon-green);
+    background: var(--doji-teal);
     cursor: pointer;
     border: none;
     box-shadow: var(--glow-neon);
 }
 
 .config-slider::-webkit-slider-track {
-    background: rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.2);
     height: 8px;
     border-radius: var(--radius-full);
 }
@@ -995,15 +995,15 @@ body {
 
 .radio-content {
     padding: var(--spacing-md);
-    background: rgba(13, 249, 13, 0.05);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
     transition: var(--transition-base);
 }
 
 .radio-card input[type="radio"]:checked + .radio-content {
-    border-color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.15);
+    border-color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.15);
     box-shadow: var(--glow-neon);
 }
 
@@ -1029,8 +1029,8 @@ body {
 }
 
 .price-low {
-    background: rgba(13, 249, 13, 0.2);
-    color: var(--neon-green);
+    background: rgba(45, 212, 191, 0.2);
+    color: var(--doji-teal);
 }
 
 .price-mid {
@@ -1052,8 +1052,8 @@ body {
 .config-select {
     width: 100%;
     padding: 0.75rem 1rem;
-    background: rgba(13, 249, 13, 0.05);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
     font-size: var(--font-size-base);
     color: var(--white);
@@ -1063,13 +1063,13 @@ body {
 
 .config-select:focus {
     outline: none;
-    border-color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.1);
+    border-color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.1);
     box-shadow: var(--glow-neon);
 }
 
 .config-select option {
-    background: var(--black-lighter);
+    background: var(--navy-light);
     color: var(--white);
 }
 
@@ -1079,8 +1079,8 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
-    background: rgba(13, 249, 13, 0.05);
-    border-left: 3px solid var(--neon-green);
+    background: rgba(45, 212, 191, 0.05);
+    border-left: 3px solid var(--doji-teal);
     border-radius: var(--radius-md);
     font-size: var(--font-size-sm);
     color: var(--gray-light);
@@ -1089,7 +1089,7 @@ body {
 
 .info-icon {
     flex-shrink: 0;
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 
 /* Summary Panel */
@@ -1103,7 +1103,7 @@ body {
     background: rgba(10, 10, 20, 0.95);
     padding: var(--spacing-xl);
     border-radius: var(--radius-2xl);
-    border: 1px solid rgba(13, 249, 13, 0.3);
+    border: 1px solid rgba(45, 212, 191, 0.3);
     box-shadow: var(--shadow-dark-strong);
 }
 
@@ -1123,8 +1123,8 @@ body {
 
 .summary-badge {
     padding: 0.5rem 1rem;
-    background: rgba(13, 249, 13, 0.2);
-    color: var(--neon-green);
+    background: rgba(45, 212, 191, 0.2);
+    color: var(--doji-teal);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: 600;
@@ -1141,7 +1141,7 @@ body {
 }
 
 .price-label {
-    color: var(--black);
+    color: var(--deep-navy);
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-xs);
     font-weight: 700;
@@ -1151,13 +1151,13 @@ body {
 .price-amount {
     font-size: var(--font-size-5xl);
     font-weight: 800;
-    color: var(--black);
+    color: var(--deep-navy);
     margin-bottom: var(--spacing-xs);
     transition: var(--transition-base);
 }
 
 .price-note {
-    color: var(--black);
+    color: var(--deep-navy);
     font-size: var(--font-size-sm);
     opacity: 0.8;
     text-transform: uppercase;
@@ -1171,7 +1171,7 @@ body {
     font-size: var(--font-size-lg);
     font-weight: 600;
     margin-bottom: var(--spacing-md);
-    color: var(--neon-green);
+    color: var(--doji-teal);
     text-transform: uppercase;
 }
 
@@ -1180,7 +1180,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid rgba(13, 249, 13, 0.1);
+    border-bottom: 1px solid rgba(45, 212, 191, 0.1);
 }
 
 .detail-item:last-child {
@@ -1195,7 +1195,7 @@ body {
 
 .detail-value {
     font-weight: 600;
-    color: var(--neon-green);
+    color: var(--doji-teal);
     text-align: right;
 }
 
@@ -1205,7 +1205,7 @@ body {
     gap: var(--spacing-sm);
     margin-top: var(--spacing-lg);
     padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(13, 249, 13, 0.1);
+    border-top: 1px solid rgba(45, 212, 191, 0.1);
 }
 
 .trust-item {
@@ -1218,7 +1218,7 @@ body {
 
 .trust-icon {
     font-size: var(--font-size-lg);
-    color: var(--neon-green);
+    color: var(--doji-teal);
 }
 /* ============================================
    PROMO CODE SECTION
@@ -1227,8 +1227,8 @@ body {
 .promo-section {
     margin-bottom: var(--spacing-lg);
     padding: var(--spacing-md);
-    background: rgba(13, 249, 13, 0.05);
-    border: 1px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 1px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
 }
 
@@ -1259,7 +1259,7 @@ body {
     width: 100%;
     padding: 0.75rem 1rem;
     background: rgba(10, 10, 20, 0.8);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-md);
     color: var(--white);
     font-size: var(--font-size-base);
@@ -1279,15 +1279,15 @@ body {
 
 .promo-input:focus {
     outline: none;
-    border-color: var(--neon-green);
+    border-color: var(--doji-teal);
     box-shadow: var(--glow-neon);
 }
 
 .btn-promo {
     width: 100%; /* Pleine largeur */
     padding: 0.75rem 1.5rem;
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
     border: none;
     border-radius: var(--radius-md);
     font-weight: 700;
@@ -1303,7 +1303,7 @@ body {
 }
 
 .btn-promo:hover {
-    background: var(--neon-green-light);
+    background: var(--doji-teal-light);
     box-shadow: var(--glow-neon-strong);
     transform: translateY(-2px);
 }
@@ -1323,8 +1323,8 @@ body {
 }
 
 .promo-message.success {
-    color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.1);
+    color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.1);
     animation: slideInRight 0.3s ease;
 }
 
@@ -1337,8 +1337,8 @@ body {
 .promo-applied {
     margin-top: var(--spacing-sm);
     padding: var(--spacing-sm);
-    background: rgba(13, 249, 13, 0.15);
-    border: 2px solid var(--neon-green);
+    background: rgba(45, 212, 191, 0.15);
+    border: 2px solid var(--doji-teal);
     border-radius: var(--radius-md);
     box-shadow: var(--glow-neon);
 }
@@ -1356,8 +1356,8 @@ body {
     justify-content: center;
     width: 20px;
     height: 20px;
-    background: var(--neon-green);
-    color: var(--black);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
     border-radius: 50%;
     font-weight: 800;
     font-size: 0.7rem;
@@ -1373,7 +1373,7 @@ body {
 }
 
 .promo-applied-text strong {
-    color: var(--neon-green);
+    color: var(--doji-teal);
     font-size: var(--font-size-sm);
     letter-spacing: 1px;
 }
@@ -1470,7 +1470,7 @@ body {
     background: rgba(10, 10, 20, 0.8);
     padding: var(--spacing-xl);
     border-radius: var(--radius-2xl);
-    border: 1px solid rgba(13, 249, 13, 0.2);
+    border: 1px solid rgba(45, 212, 191, 0.2);
     box-shadow: var(--shadow-dark);
     margin-bottom: var(--spacing-xl);
 }
@@ -1501,7 +1501,7 @@ body {
     overflow-x: auto;
     padding-bottom: var(--spacing-sm);
     scrollbar-width: thin;
-    scrollbar-color: var(--neon-green) rgba(13, 249, 13, 0.1);
+    scrollbar-color: var(--doji-teal) rgba(45, 212, 191, 0.1);
 }
 
 .presets-tabs::-webkit-scrollbar {
@@ -1509,12 +1509,12 @@ body {
 }
 
 .presets-tabs::-webkit-scrollbar-track {
-    background: rgba(13, 249, 13, 0.1);
+    background: rgba(45, 212, 191, 0.1);
     border-radius: var(--radius-full);
 }
 
 .presets-tabs::-webkit-scrollbar-thumb {
-    background: var(--neon-green);
+    background: var(--doji-teal);
     border-radius: var(--radius-full);
 }
 
@@ -1523,8 +1523,8 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-md) var(--spacing-lg);
-    background: rgba(13, 249, 13, 0.05);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: var(--transition-base);
@@ -1537,15 +1537,15 @@ body {
 }
 
 .preset-tab:hover {
-    background: rgba(13, 249, 13, 0.1);
-    border-color: var(--neon-green);
+    background: rgba(45, 212, 191, 0.1);
+    border-color: var(--doji-teal);
     color: var(--white);
 }
 
 .preset-tab.active {
-    background: var(--neon-green);
-    color: var(--black);
-    border-color: var(--neon-green);
+    background: var(--doji-teal);
+    color: var(--deep-navy);
+    border-color: var(--doji-teal);
     box-shadow: var(--glow-neon-strong);
 }
 
@@ -1580,18 +1580,18 @@ body {
 
 /* Preset Card */
 .preset-card {
-    background: rgba(13, 249, 13, 0.05);
+    background: rgba(45, 212, 191, 0.05);
     padding: var(--spacing-lg);
     border-radius: var(--radius-xl);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     cursor: pointer;
     transition: var(--transition-base);
     text-align: center;
 }
 
 .preset-card:hover {
-    border-color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.1);
+    border-color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.1);
     transform: translateY(-5px);
     box-shadow: var(--glow-neon-strong);
 }
@@ -1626,8 +1626,8 @@ body {
 
 .tag {
     padding: 0.25rem 0.75rem;
-    background: rgba(13, 249, 13, 0.2);
-    color: var(--neon-green);
+    background: rgba(45, 212, 191, 0.2);
+    color: var(--doji-teal);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: 600;
@@ -1639,8 +1639,8 @@ body {
     text-align: center;
     margin-bottom: var(--spacing-xl);
     padding: var(--spacing-lg);
-    background: rgba(13, 249, 13, 0.05);
-    border: 1px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 1px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
 }
 
@@ -1659,12 +1659,12 @@ body {
 }
 
 .custom-preset {
-    background: linear-gradient(135deg, rgba(13, 249, 13, 0.05) 0%, rgba(13, 249, 13, 0.1) 100%);
-    border: 2px dashed var(--neon-green);
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.05) 0%, rgba(45, 212, 191, 0.1) 100%);
+    border: 2px dashed var(--doji-teal);
 }
 
 .custom-preset:hover {
-    background: linear-gradient(135deg, rgba(13, 249, 13, 0.1) 0%, rgba(13, 249, 13, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.1) 0%, rgba(45, 212, 191, 0.15) 100%);
 }
 
 .preset-header {
@@ -1695,8 +1695,8 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-md) var(--spacing-lg);
-    background: rgba(13, 249, 13, 0.05);
-    border: 2px solid rgba(13, 249, 13, 0.2);
+    background: rgba(45, 212, 191, 0.05);
+    border: 2px solid rgba(45, 212, 191, 0.2);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: var(--transition-base);
@@ -1707,8 +1707,8 @@ body {
 }
 
 .action-btn:hover {
-    border-color: var(--neon-green);
-    background: rgba(13, 249, 13, 0.15);
+    border-color: var(--doji-teal);
+    background: rgba(45, 212, 191, 0.15);
     transform: translateY(-2px);
     box-shadow: var(--glow-neon);
 }
@@ -1913,6 +1913,6 @@ body {
 .typing-effect {
     overflow: hidden;
     white-space: nowrap;
-    border-right: 3px solid var(--neon-green);
+    border-right: 3px solid var(--doji-teal);
     animation: typing 3s steps(40) 1s 1 normal both;
 }
