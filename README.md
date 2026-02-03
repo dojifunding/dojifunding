@@ -53,7 +53,7 @@ Accéder à : `http://localhost:8000`
 
 ## 📸 Screenshots
 
-_Coming soon..._
+Maquette https://dojifunding.infinityfree.me/index.php
 
 ## 🗺️ Roadmap
 
