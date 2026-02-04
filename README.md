@@ -63,7 +63,11 @@ Maquette https://dojifunding.infinityfree.me/index.php
 - [ ] Système de paiement Stripe
 - [ ] Système de paiement Confirmo (crypto)
 - [ ] Dashboard utilisateur
+- [ ] Dashboard administrateur
+- [ ] Ctrader w/ GBE
+- [ ] Connectivity and test
 - [ ] API RESTful
+- [ ] Risk Monitoring
 
 ## 📄 License
 
