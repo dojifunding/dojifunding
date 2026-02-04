@@ -61,6 +61,7 @@ Maquette https://dojifunding.infinityfree.me/index.php
 - [x] Configurateur interactif
 - [ ] Backend PHP avec base de données
 - [ ] Système de paiement Stripe
+- [ ] Système de paiement Confirmo (crypto)
 - [ ] Dashboard utilisateur
 - [ ] API RESTful
 
