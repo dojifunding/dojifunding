@@ -8,25 +8,26 @@
 
 ## 📖 Description
 
-Doji Funding est une plateforme PropFirm unique qui permet aux traders de créer leur évaluation de trading sur mesure avec plus de **10 millions de combinaisons possibles**.
+Doji Funding est une plateforme PropFirm unique qui permet aux traders de créer leur évaluation de trading sur mesure avec plus de **700.000 combinaisons possibles**.
 
 ### ✨ Caractéristiques Principales
 
-- 🎨 **Configurateur Avancé** : 11 paramètres configurables
+- 🎨 **Configurateur Avancé** : 12 paramètres configurables
 - 💰 **Pricing Dynamique** : Prix calculé en temps réel selon votre configuration
-- ⚡ **3 Types de Comptes** : 2 Steps, 3 Steps, Instant Funding
+- ⚡ **3 Types de Comptes** : 1 Step, 2 Steps, Instant Funding (à venir)
 - 🎯 **Flexibilité Totale** : Choisissez vos targets, drawdown, leverage, etc.
 
 ## 🚀 Fonctionnalités
 
 ### Configuration Personnalisable
 
-- **Montant du compte** : $2K à $100K
-- **Système de risque** : Static, Trailing ou EOD Drawdown
-- **Profit Target** : 2% à 25%
-- **Max Drawdown** : 2% à 25%
-- **Consistency Rules** : Aucune à 10% max
-- **Profit Split** : 50% à 100%
+- **Montant du compte** : $5K à $100K
+- **Système de risque** : Static, Trailing ou EOD Drawdown pour less Daily Losss & Max Losss
+- **Profit Target** : 5% à 15%
+- **Daily Loss** : 2% à 7%
+- **Max Drawdown** : 4% à 12%
+- **Consistency Rules** : 50% à 10% max
+- **Profit Split** : 50% à 90%
 - **Levier** : 1:1 à 1:400
 - **Et plus encore...**
 
