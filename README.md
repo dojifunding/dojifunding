@@ -15,7 +15,7 @@ Doji Funding est une plateforme PropFirm unique qui permet aux traders de créer
 - 🎨 **Configurateur Avancé** : 12 paramètres configurables
 - 💰 **Pricing Dynamique** : Prix calculé en temps réel selon votre configuration
 - ⚡ **3 Types de Comptes** : 1 Step, 2 Steps, Instant Funding (à venir)
-- 🎯 **Flexibilité Totale** : Choisissez vos targets, drawdown, leverage, etc.
+- 🎯 **Flexibilité Totale** : Choisissez vos targets, drawdown, profit split, etc.
 
 ## 🚀 Fonctionnalités
 
